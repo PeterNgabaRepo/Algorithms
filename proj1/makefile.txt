@@ -1,0 +1,28 @@
+CXX = g++ -ggdb
+CXXFLAGS = -Wall
+
+driver: bogoSort.o insertSort.o mergeSort.o bucketSort.o bubbleSort.o quickSort.o driver.cpp
+	$(CXX) $(CXXFLAGS) bogoSort.o insertSort.o mergeSort.o bucketSort.o bubbleSort.o quickSort.o driver.cpp -o driver
+
+quickSort.o: quickSort.h quickSort.cpp
+	$(CXX) $(CXXFLAGS) -c quickSort.cpp
+
+bubbleSort.o: bubbleSort.h bubbleSort.cpp
+	$(CXX) $(CXXFLAGS) -c bubbleSort.cpp
+
+bucketSort.o: insertSort.o bucketSort.h bucketSort.cpp
+	$(CXX) $(CXXFLAGS) -c bucketSort.cpp
+
+mergeSort.o: mergeSort.h mergeSort.cpp
+	$(CXX) $(CXXFLAGS) -c mergeSort.cpp
+
+insertSort.o: insertSort.h insertSort.cpp
+	$(CXX) $(CXXFLAGS) -c insertSort.cpp
+
+bogoSort.o: bogoSort.h bogoSort.cpp
+	$(CXX) $(CXXFLAGS) -c bogoSort.cpp
+clean:
+	rm *~
+
+run:
+	./driver
